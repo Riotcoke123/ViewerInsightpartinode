@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Parti Streamer Viewer Analysis</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="image-row">
+  <img src="2.jpg" alt="hacker pepe" class="side-image" />
+  <img src="1.jpg" alt="logo" class="side-image" />
+</div>
+
+
+  <h1>Parti Streamer Viewer Analysis</h1>
+  <div id="streamers"></div>
+
+  <script>
+    async function fetchData() {
+      try {
+        const res = await fetch('/api/streamers');
+        const data = await res.json();
+        const container = document.getElementById('streamers');
+        container.innerHTML = '';
+        data.forEach(item => {
+          const { social_username, avatar_link, viewer_analysis } = item;
+          const total = viewer_analysis.total_viewer_count;
+
+          function getStatus(ratio) {
+            const bots = ratio.bot_viewer_count;
+            const percent = total ? (bots / total) * 100 : 0;
+            const isBotted = percent > 80;
+            return { text: isBotted ? "⚠️ Looks Botted" : "✅ Clean", className: isBotted ? "status-botted" : "status-clean" };
+          }
+
+          const status8 = getStatus(viewer_analysis["8:1_ratio"]);
+          const status12 = getStatus(viewer_analysis["12:1_ratio"]);
+
+          container.innerHTML += `
+            <div class="streamer">
+              <img src="${avatar_link || ''}" alt="Avatar" onerror="this.style.display='none'" />
+              <h3>${social_username || 'Unknown'}</h3>
+              <p>Total Viewers: <strong>${total}</strong></p>
+
+              <h4>8:1 Ratio</h4>
+              <p>Real Viewers: ${viewer_analysis["8:1_ratio"].real_viewer_count}</p>
+              <p>Fake Viewers: ${viewer_analysis["8:1_ratio"].bot_viewer_count}</p>
+              <p class="${status8.className}">Status: ${status8.text}</p>
+
+              <h4>12:1 Ratio</h4>
+              <p>Real Viewers: ${viewer_analysis["12:1_ratio"].real_viewer_count}</p>
+              <p>Fake Viewers: ${viewer_analysis["12:1_ratio"].bot_viewer_count}</p>
+              <p class="${status12.className}">Status: ${status12.text}</p>
+            </div>
+          `;
+        });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        document.getElementById('streamers').innerText = 'Error loading data.';
+      }
+    }
+
+    fetchData();
+    setInterval(fetchData, 60000);
+  </script>
+</body>
+</html>
