@@ -1,0 +1,20 @@
+[
+  {
+    "user_id": "465731",
+    "avatar_link": "https://assets.parti.com/465731_495de7d9-96da-4415-85dd-4d0c62882059.png",
+    "social_username": "worldoftshirts2001",
+    "viewer_analysis": {
+      "id": 465731,
+      "total_viewer_count": 5317,
+      "8:1_ratio": {
+        "real_viewer_count": 590,
+        "bot_viewer_count": 4726
+      },
+      "12:1_ratio": {
+        "real_viewer_count": 409,
+        "bot_viewer_count": 4908
+      }
+    },
+    "timestamp": "2025-06-02T06:49:12.879Z"
+  }
+]
