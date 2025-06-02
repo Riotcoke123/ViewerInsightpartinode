@@ -1,4 +1,8 @@
-<h1>🎥 ViewerInsight (Beta)</h1>
+<img src="https://github.com/user-attachments/assets/4ac2b312-251b-4d4e-87d7-17c3c9590b3e">
+
+
+
+<h1>🎥 Viewer Insight (Beta)</h1>
 <h3>Parti Streamer Viewer Analysis</h3>
 
 <p><strong>ViewerInsight</strong> is a Node.js-based application that analyzes Parti livestreams to estimate real vs. bot viewers using ratio heuristics (8:1 and 12:1). It fetches and analyzes data from the Parti API, provides results via a JSON endpoint, and saves them to <code>data.json</code>.</p>
